@@ -83,3 +83,37 @@ FOREIGN KEY ("user_id")
   [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
   [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/graphql" for 127.0.0.1 at 2018-04-19 20:34:33 -0400
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"WhoAmi", "variables"=>{}, "query"=>"query WhoAmi {\n  viewer {\n    self {\n      name\n      email\n      __typename\n    }\n    __typename\n  }\n}\n", "graphql"=>{"operationName"=>"WhoAmi", "variables"=>{}, "query"=>"query WhoAmi {\n  viewer {\n    self {\n      name\n      email\n      __typename\n    }\n    __typename\n  }\n}\n"}}
+Completed 200 OK in 167ms (Views: 0.8ms | ActiveRecord: 26.8ms)
+
+
+Started POST "/graphql" for 127.0.0.1 at 2018-04-19 20:34:56 -0400
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"SignUpUser", "variables"=>{"credentials"=>{"name"=>"Tyler", "email"=>"tylergaugler16@gmail.com", "password"=>"[FILTERED]"}}, "query"=>"mutation SignUpUser($credentials: AuthProviderCredentials) {\n  createUser(credentials: $credentials) {\n    token\n    user {\n      name\n      email\n      __typename\n    }\n    __typename\n  }\n}\n", "graphql"=>{"operationName"=>"SignUpUser", "variables"=>{"credentials"=>{"name"=>"Tyler", "email"=>"tylergaugler16@gmail.com", "password"=>"[FILTERED]"}}, "query"=>"mutation SignUpUser($credentials: AuthProviderCredentials) {\n  createUser(credentials: $credentials) {\n    token\n    user {\n      name\n      email\n      __typename\n    }\n    __typename\n  }\n}\n"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (1.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."uuid" = $1 LIMIT $2[0m  [["uuid", "9324a520-2660-0136-364d-3c15c2d411a4"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "tylergaugler16@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("uuid", "name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["uuid", "9324a520-2660-0136-364d-3c15c2d411a4"], ["name", "Tyler"], ["email", "tylergaugler16@gmail.com"], ["password_digest", "$2a$10$Lj8QRI2XcMuTq/3yjZznf.P6nTMysZKrDW9CS9.d0iudtXXYPRBBa"], ["created_at", "2018-04-20 00:34:56.980799"], ["updated_at", "2018-04-20 00:34:56.980799"]]
+  [1m[35m (5.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 107ms (Views: 0.3ms | ActiveRecord: 14.9ms)
+
+
+Started POST "/graphql" for 127.0.0.1 at 2018-04-19 20:42:16 -0400
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"LogInUser", "variables"=>{"credentials"=>{"email"=>"tylergaugler16@gmail.com", "password"=>"[FILTERED]"}}, "query"=>"mutation LogInUser($credentials: AuthProviderCredentials) {\n  loginUser(credentials: $credentials) {\n    token\n    user {\n      name\n      email\n      __typename\n    }\n    __typename\n  }\n}\n", "graphql"=>{"operationName"=>"LogInUser", "variables"=>{"credentials"=>{"email"=>"tylergaugler16@gmail.com", "password"=>"[FILTERED]"}}, "query"=>"mutation LogInUser($credentials: AuthProviderCredentials) {\n  loginUser(credentials: $credentials) {\n    token\n    user {\n      name\n      email\n      __typename\n    }\n    __typename\n  }\n}\n"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "tylergaugler16@gmail.com"], ["LIMIT", 1]]
+Completed 200 OK in 83ms (Views: 0.3ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/graphql" for 127.0.0.1 at 2018-04-19 20:42:20 -0400
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"Posts", "variables"=>{}, "query"=>"query Posts {\n  viewer {\n    public_posts {\n      totalCount\n      edges {\n        node {\n          id\n          title\n          excerpt\n          body\n          published_at_ms\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n", "graphql"=>{"operationName"=>"Posts", "variables"=>{}, "query"=>"query Posts {\n  viewer {\n    public_posts {\n      totalCount\n      edges {\n        node {\n          id\n          title\n          excerpt\n          body\n          published_at_ms\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."uuid" = $1 LIMIT $2[0m  [["uuid", "9324a520-2660-0136-364d-3c15c2d411a4"], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "posts" WHERE ("posts"."published_at" IS NOT NULL)[0m
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE ("posts"."published_at" IS NOT NULL) LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 0]]
+Completed 200 OK in 24ms (Views: 0.2ms | ActiveRecord: 5.9ms)
+
+
